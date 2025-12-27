@@ -1,51 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Albert Wenger - Personal Website">
+  <title>Albert Wenger</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Albert Wenger">
+    body {
+      background-color: #0a0a0a;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+    }
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    .terminal {
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid #00ff00;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
 
-    <title>Albert Wenger</title>
-  </head>
+    .terminal-header {
+      background-color: #1a1a1a;
+      padding: 8px 15px;
+      border-bottom: 1px solid #00ff00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  <body>
+    .terminal-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/albertwenger">View on GitHub</a>
+    .btn-red { background-color: #ff5f56; }
+    .btn-yellow { background-color: #ffbd2e; }
+    .btn-green { background-color: #27c93f; }
 
-          <h1 id="project_title">Albert Wenger</h1>
-          <h2 id="project_tagline">One of my homes on the net</h2>
+    .terminal-title {
+      color: #888;
+      font-size: 12px;
+      margin-left: 10px;
+    }
 
-        </header>
+    .terminal-body {
+      padding: 20px;
+      background-color: #0a0a0a;
+    }
+
+    .ascii-art {
+      font-size: clamp(4px, 1.2vw, 10px);
+      line-height: 1.2;
+      white-space: pre;
+      color: #00ff00;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+
+    .prompt {
+      color: #00ff00;
+    }
+
+    .prompt::before {
+      content: "$ ";
+      color: #00cc00;
+    }
+
+    .tagline {
+      color: #00cc00;
+      margin-bottom: 30px;
+      padding-left: 20px;
+      border-left: 2px solid #00ff00;
+    }
+
+    .section-title {
+      color: #00ff00;
+      margin: 25px 0 15px 0;
+      font-size: 1.1em;
+    }
+
+    .section-title::before {
+      content: ">> ";
+      color: #00cc00;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    li::before {
+      content: "├── ";
+      color: #00cc00;
+    }
+
+    li:last-child::before {
+      content: "└── ";
+    }
+
+    a {
+      color: #00ff00;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    a:hover {
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px dashed #004400;
+      color: #006600;
+      font-size: 0.9em;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background-color: #00ff00;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      z-index: 1000;
+    }
+
+    @media (max-width: 600px) {
+      .ascii-art {
+        font-size: 3px;
+      }
+
+      body {
+        padding: 10px;
+      }
+
+      .terminal-body {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="terminal-btn btn-red"></span>
+      <span class="terminal-btn btn-yellow"></span>
+      <span class="terminal-btn btn-green"></span>
+      <span class="terminal-title">albertwenger@web:~</span>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="terminal-body">
+      <pre class="ascii-art">
+    _   _    ___  ___ ___ _____  __      _____ _  _  ___ ___ ___
+   /_\ | |  | _ )| __| _ \_   _| \ \    / / __| \| |/ __| __| _ \
+  / _ \| |__| _ \| _||   / | |    \ \/\/ /| _|| .` | (_ | _||   /
+ /_/ \_\____|___/|___|_|_\ |_|     \_/\_/ |___|_|\_|\___|___|_|_\
+      </pre>
 
-        <h1>Projects</h1>
+      <p class="tagline">One of my homes on the net</p>
 
-        <ul>
-          <li><a href="principles">Principles</a></li>
-        </ul>
+      <p class="section-title">Projects</p>
+      <ul>
+        <li><a href="principles">Principles</a></li>
+      </ul>
 
-        
-      </section>
+      <p class="section-title">Links</p>
+      <ul>
+        <li><a href="https://github.com/albertwenger">GitHub</a></li>
+      </ul>
+
+      <div class="footer">
+        <p class="prompt">Published with <a href="https://pages.github.com">GitHub Pages</a> <span class="cursor"></span></p>
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-
-
-  </body>
+  </div>
+</body>
 </html>
